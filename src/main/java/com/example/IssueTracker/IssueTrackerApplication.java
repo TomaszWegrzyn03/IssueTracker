@@ -12,9 +12,11 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.auditing.CurrentDateTimeProvider;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDate;
 
+@CrossOrigin
 @SpringBootApplication
 public class IssueTrackerApplication {
 

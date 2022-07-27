@@ -1,6 +1,5 @@
 package com.example.IssueTracker.user.registration;
 
-
 import lombok.*;
 @Data
 @AllArgsConstructor
