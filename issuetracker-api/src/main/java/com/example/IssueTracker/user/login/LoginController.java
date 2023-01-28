@@ -1,8 +1,6 @@
 package com.example.IssueTracker.user.login;
 
-import com.example.IssueTracker.project.ProjectDto;
 import com.example.IssueTracker.user.CustomUserDetails;
-import com.example.IssueTracker.user.SimpleUserDto;
 import com.example.IssueTracker.user.User;
 import com.example.IssueTracker.user.security.JWTTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +39,6 @@ public class LoginController {
             User user = (User) authentication.getPrincipal();
 
             CustomUserDetails customUserDetails = new CustomUserDetails(user);
-
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.AUTHORIZATION,
