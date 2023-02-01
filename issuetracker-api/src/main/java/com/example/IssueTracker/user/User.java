@@ -54,6 +54,9 @@ public class User implements UserDetails {
     public User(Long userId, String username) {
     }
 
+    public User(String username, String email, UserRole roleUser, String password, LocalDate now, boolean b, boolean b1) {
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(userRole.name());

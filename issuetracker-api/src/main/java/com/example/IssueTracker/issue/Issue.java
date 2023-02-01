@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "issues") @Table @AllArgsConstructor @NoArgsConstructor @Getter @Setter
+@Entity(name = "issues") @Table  @NoArgsConstructor @Getter @Setter
 public class Issue {
 
     @Id
@@ -52,7 +52,16 @@ public class Issue {
     )
     private List<User> issueUsers = new ArrayList<>();
 
-
-
+    public Issue(String issueTitle, String issueDesc, String issueType, String issueStatus,
+                 String issuePriority, Long projectId, LocalDate createdAt, List<User> issueUsers) {
+        this.issueTitle = issueTitle;
+        this.issueDesc = issueDesc;
+        this.createdAt = createdAt;
+        this.issueType = issueType;
+        this.issueStatus = issueStatus;
+        this.issuePriority = issuePriority;
+        this.projectId = projectId;
+        this.issueUsers = issueUsers;
+    }
 
 }
