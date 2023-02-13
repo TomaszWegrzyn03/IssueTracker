@@ -1,6 +1,5 @@
 package com.example.IssueTracker.issue;
 
-
 import com.example.IssueTracker.user.SimpleUserDto;
 import lombok.*;
 

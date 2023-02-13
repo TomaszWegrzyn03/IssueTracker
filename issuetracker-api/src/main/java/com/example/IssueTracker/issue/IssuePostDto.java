@@ -1,10 +1,6 @@
 package com.example.IssueTracker.issue;
-
-
 import com.example.IssueTracker.user.SimpleUserDto;
 import lombok.*;
-
-import java.util.Date;
 import java.util.List;
 
 @Data
