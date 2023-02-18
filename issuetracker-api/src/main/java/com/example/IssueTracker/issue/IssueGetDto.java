@@ -1,31 +1,13 @@
 package com.example.IssueTracker.issue;
-
 import com.example.IssueTracker.user.SimpleUserDto;
-import lombok.*;
-
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class IssueGetDto {
-
-    private Long issueId;
-
-    private String issueTitle;
-
-    private String issueDesc;
-
-    private String issueType;
-
-    private String issueStatus;
-
-    private String issuePriority;
-
-    private Long projectId;
-
-    private List<SimpleUserDto> users;
-
+public record IssueGetDto (Long issueId, String issueTitle, String issueDesc,
+                           String issueType, String issueStatus, String issuePriority,
+                           Long projectId, List<SimpleUserDto> users)
+{
 }
