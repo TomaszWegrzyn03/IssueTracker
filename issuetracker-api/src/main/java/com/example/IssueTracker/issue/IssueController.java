@@ -1,8 +1,6 @@
 package com.example.IssueTracker.issue;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -11,7 +9,6 @@ public class IssueController {
 
     @Autowired
     private IssueService issueService;
-
 
     @GetMapping
     public List<IssueDto> getAllSimpleIssues(){
@@ -32,7 +29,6 @@ public class IssueController {
     public Issue postIssueDto(@RequestBody IssuePostDto issuePostDto){
         return issueService.postIssue(issuePostDto);
     }
-
 
     @DeleteMapping("/{id}")
     public void deleteIssue(@PathVariable("id") Long issue){

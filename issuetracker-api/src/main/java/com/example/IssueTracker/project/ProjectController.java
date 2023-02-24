@@ -1,9 +1,7 @@
 package com.example.IssueTracker.project;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -13,7 +11,6 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-
     @GetMapping
     public List<ProjectTestDto> getAllProjects(){
         return projectService.getAllProjects();
@@ -22,14 +19,12 @@ public class ProjectController {
     @GetMapping("/simple")
     public List<ProjectDto> getAllSimpleProjects(){
        return projectService.getAllSimpleProjects();
-
     }
 
     @GetMapping("/userSimpleProjects")
     public List<ProjectDto> getAllUserProjects(@org.jetbrains.annotations.NotNull Authentication authentication){
             String username = authentication.getName();
         return projectService.getAllUserProjects(username);
-
     }
 
     @GetMapping("/{id}")
@@ -47,6 +42,5 @@ public class ProjectController {
         projectService.deleteProject(projectId);
         return "Project" + projectId + "deleted successfully";
     }
-
 
 }
