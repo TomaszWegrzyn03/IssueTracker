@@ -1,10 +1,7 @@
 package com.example.IssueTracker.issue;
-
-
 import com.example.IssueTracker.project.Project;
 import com.example.IssueTracker.user.User;
 import lombok.*;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;

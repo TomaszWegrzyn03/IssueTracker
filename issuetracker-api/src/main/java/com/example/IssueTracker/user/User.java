@@ -1,5 +1,4 @@
 package com.example.IssueTracker.user;
-
 import com.example.IssueTracker.issue.Issue;
 import com.example.IssueTracker.project.Project;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;

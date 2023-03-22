@@ -3,16 +3,14 @@ package com.example.IssueTracker.project;
 
 import com.example.IssueTracker.issue.Issue;
 import com.example.IssueTracker.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "projects") @Table @AllArgsConstructor @NoArgsConstructor @Getter @Setter
+@Entity(name = "projects") @Table @AllArgsConstructor @NoArgsConstructor @Getter @Setter @ToString
 public class Project {
 
     @Id
@@ -30,6 +28,7 @@ public class Project {
     private LocalDate createdAt;
 
     @OneToMany(mappedBy = "project")
+    @ToString.Exclude
     private List<Issue> issues;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -38,9 +37,7 @@ public class Project {
             joinColumns = @JoinColumn(name="project_id"),
             inverseJoinColumns = @JoinColumn(name="user_id")
     )
+    @ToString.Exclude
     private List<User> projectUsers = new ArrayList<>();
-
-
-
 
 }
