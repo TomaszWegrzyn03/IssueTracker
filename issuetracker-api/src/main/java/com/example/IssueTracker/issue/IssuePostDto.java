@@ -1,12 +1,21 @@
 package com.example.IssueTracker.issue;
 import com.example.IssueTracker.user.SimpleUserDto;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.List;
 
 @Getter
 @Setter
-public record IssuePostDto(String issueTitle, String issueDesc, String issueType, String issueStatus, String issuePriority, Long projectId, List<SimpleUserDto> users)
-{
-}
+@Data
+public final class IssuePostDto {
+    private  String issueTitle;
+    private  String issueDesc;
+    private  String issueType;
+    private  String issueStatus;
+    private  String issuePriority;
+    private  Long projectId;
+    private List<SimpleUserDto> users;
+    }
+
+
