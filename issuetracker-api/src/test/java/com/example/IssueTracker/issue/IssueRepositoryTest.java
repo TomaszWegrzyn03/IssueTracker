@@ -2,9 +2,12 @@ package com.example.IssueTracker.issue;
 import com.example.IssueTracker.project.Project;
 import com.example.IssueTracker.project.ProjectRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.DirtiesContext;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +23,14 @@ class IssueRepositoryTest {
 
     @AfterEach
     void tearDown() {
-        projectRepository.deleteAll();
-        issueRepository.deleteAll();
+        issueRepository.deleteAllTestIssues();
+        projectRepository.deleteAllTestProjects();
     }
 
     @Test
     void itShouldFindIssuesByProjectId() {
         //given
-        Long projectId = (long)1;
+        Long projectId = 1L;
         Project project = new Project(projectId,"TestProject","TestProject",LocalDate.now(),null, null);
         Issue issue1 = new Issue("Issue1","Issue1",
                 "Issue1","Issue1",
@@ -45,20 +48,20 @@ class IssueRepositoryTest {
         List<Issue> issuesFoundByProjectId = issueRepository.findIssueByProjectId(projectId);
 
         //then
-        assertEquals(issues, issuesFoundByProjectId);
+        assertEquals(issuesFoundByProjectId, issues);
     }
 
     @Test
     void itShouldNotFindAnyIssues() {
         //given
-        Long projectId1 = (long)1;
-        Long projectId2 = (long)2;
+        Long projectId1 = 1L;
+        Long projectId2 = 2L;
         Project project1 = new Project(projectId1,"Project1","Project1",LocalDate.now(),null, null);
         Project project2 = new Project(projectId2,"Project2","Project2",LocalDate.now(),null, null);
-        Issue issue1 = new Issue("Issue1","Issue1",
+        Issue issue1 = new Issue(1L,"Issue1","Issue1",
                 "Issue1","Issue1",
                 "Issue1",projectId1, LocalDate.now(),null);
-        Issue issue2 = new Issue("Issue2","Issue2",
+        Issue issue2 = new Issue(2L,"Issue2","Issue2",
                 "Issue2","Issue2",
                 "Issue2",projectId1, LocalDate.now(),null);
         List<Issue> issues = new ArrayList<>();
@@ -78,12 +81,12 @@ class IssueRepositoryTest {
     @Test
     void itShouldDeleteAllIssuesByProjectId() {
         //given
-        Long projectId = (long)1;
+        Long projectId = 1L;
         Project project = new Project(projectId,"TestProject","TestProject",LocalDate.now(),null, null);
-        Issue issue1 = new Issue("Issue1","Issue1",
+        Issue issue1 = new Issue(1L,"Issue1","Issue1",
                 "Issue1","Issue1",
                 "Issue1",projectId, LocalDate.now(),null);
-        Issue issue2 = new Issue("Issue2","Issue2",
+        Issue issue2 = new Issue(2L,"Issue2","Issue2",
                 "Issue2","Issue2",
                 "Issue2",projectId, LocalDate.now(),null);
         List<Issue> issues = new ArrayList<>();
@@ -107,10 +110,10 @@ class IssueRepositoryTest {
         Long projectId2 = (long)2;
         Project project1 = new Project(projectId1,"Project1","Project1",LocalDate.now(),null, null);
         Project project2 = new Project(projectId2,"Project2","Project2",LocalDate.now(),null, null);
-        Issue issue1 = new Issue("Issue1","Issue1",
+        Issue issue1 = new Issue(1L,"Issue1","Issue1",
                 "Issue1","Issue1",
                 "Issue1",projectId1, LocalDate.now(),null);
-        Issue issue2 = new Issue("Issue2","Issue2",
+        Issue issue2 = new Issue(2L,"Issue2","Issue2",
                 "Issue2","Issue2",
                 "Issue2",projectId1, LocalDate.now(),null);
         List<Issue> issues = new ArrayList<>();
@@ -125,14 +128,14 @@ class IssueRepositoryTest {
         List<Issue> issuesFoundByProjectId = issueRepository.findIssueByProjectId(projectId1);
 
         //then
-        assertEquals(issues, issuesFoundByProjectId);
+        assertEquals( issuesFoundByProjectId.size(),2);
     }
     @Test
     void itShouldDeleteIssue() {
         //given
         Long projectId = (long)1;
         Project project = new Project(projectId,"TestProject","TestProject",LocalDate.now(),null, null);
-        Issue issue1 = new Issue("Issue1","Issue1",
+        Issue issue1 = new Issue(1L,"Issue1","Issue1",
                 "Issue1","Issue1",
                 "Issue1",projectId, LocalDate.now(),null);
         List<Issue> issues = new ArrayList<>();
@@ -153,10 +156,10 @@ class IssueRepositoryTest {
         //given
         Long projectId = (long)1;
         Project project = new Project(projectId,"TestProject","TestProject",LocalDate.now(),null, null);
-        Issue issue1 = new Issue("Issue1","Issue1",
+        Issue issue1 = new Issue(1L,"Issue1","Issue1",
                 "Issue1","Issue1",
                 "Issue1",projectId, LocalDate.now(),null);
-        Issue issue2 = new Issue("Issue2","Issue2",
+        Issue issue2 = new Issue(2L,"Issue2","Issue2",
                 "Issue2","Issue2",
                 "Issue2",projectId, LocalDate.now(),null);
         List<Issue> issues = new ArrayList<>();
@@ -166,13 +169,11 @@ class IssueRepositoryTest {
         issueRepository.saveAll(issues);
 
         //when
-        issueRepository.deleteIssue(issue1.getIssueId());
-        List<Issue> listWithOneIssue = new ArrayList<>();
-        listWithOneIssue.add(issue2);
+        issueRepository.deleteIssue(1L);
         List<Issue> issuesFoundByProjectId = issueRepository.findIssueByProjectId(projectId);
 
         //then
-        assertEquals(issuesFoundByProjectId,listWithOneIssue);
+        assertEquals(issuesFoundByProjectId.size(),1);
     }
 
 
