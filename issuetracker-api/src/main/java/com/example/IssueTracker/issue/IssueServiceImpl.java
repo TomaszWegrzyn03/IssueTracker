@@ -2,7 +2,6 @@ package com.example.IssueTracker.issue;
 import com.example.IssueTracker.user.SimpleUserDto;
 import com.example.IssueTracker.user.User;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -12,14 +11,15 @@ import java.util.stream.Collectors;
 @Service
 public class IssueServiceImpl  implements IssueService{
 
-    @Autowired
-    private IssueRepository issueRepository;
+    private final IssueRepository issueRepository;
+    public IssueServiceImpl(IssueRepository issueRepository) {
+        this.issueRepository = issueRepository;
+    }
 
     @Bean
     private ModelMapper modelMapper(){
         return new ModelMapper();
     }
-
 
     @Override
     public List<IssueDto> getAllIssues() {
@@ -77,8 +77,8 @@ public class IssueServiceImpl  implements IssueService{
 
     @Override
     public Issue updateIssue(Long issueid, Issue issue) {
-         Issue issueToUpdate =  issueRepository.findById(issueid).get();
-         issueToUpdate.setIssueId(issue.getIssueId());
+        Issue issueToUpdate =  issueRepository.findById(issueid).get();
+        issueToUpdate.setIssueId(issue.getIssueId());
         issueToUpdate.setIssueDesc(issue.getIssueDesc());
         issueToUpdate.setIssueStatus(issue.getIssueStatus());
         issueToUpdate.setIssuePriority(issue.getIssuePriority());

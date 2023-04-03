@@ -3,7 +3,6 @@ import com.example.IssueTracker.issue.IssueRepository;
 import com.example.IssueTracker.user.SimpleUserDto;
 import com.example.IssueTracker.user.User;
 import com.example.IssueTracker.user.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,17 +11,20 @@ import java.util.List;
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
-    @Autowired
-    private ProjectRepository projectRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private IssueRepository issueRepository;
+    private final ProjectRepository projectRepository;
+    private final UserRepository userRepository;
+    private final IssueRepository issueRepository;
+
+    public ProjectServiceImpl(ProjectRepository projectRepository, UserRepository userRepository, IssueRepository issueRepository) {
+        this.projectRepository = projectRepository;
+        this.userRepository = userRepository;
+        this.issueRepository = issueRepository;
+    }
 
     @Override
-    public List<ProjectTestDto> getAllProjects() {
+    public List<ProjectGetDto> getAllProjects() {
         return projectRepository.findAll().stream()
-                .map(project -> new ProjectTestDto(
+                .map(project -> new ProjectGetDto(
                         project.getProjectId(),
                         project.getTitle(),
                         project.getProjectUsers()
