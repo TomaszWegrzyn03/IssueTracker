@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
 
-
 @Setter @AllArgsConstructor @NoArgsConstructor @Getter
 public final class IssueDto {
     private Long Id;
