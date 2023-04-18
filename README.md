@@ -22,6 +22,7 @@ A Jira-like application that allows issues/bug tracking, task assigning and Kanb
 <h2> DELETE Project. </h2>
 <h2> UPDATE  Project. </h2>
 
+# Authentication
 
 
 
