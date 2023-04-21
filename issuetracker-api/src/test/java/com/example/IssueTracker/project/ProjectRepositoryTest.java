@@ -1,6 +1,5 @@
 package com.example.IssueTracker.project;
 
-import com.example.IssueTracker.issue.IssueRepository;
 import com.example.IssueTracker.user.User;
 import com.example.IssueTracker.user.UserRepository;
 import com.example.IssueTracker.user.UserRole;
@@ -25,20 +24,21 @@ class ProjectRepositoryTest {
 
     @AfterEach
     void tearDown() {
-        projectRepository.deleteAll();
-        userRepository.deleteAll();
+        userRepository.deleteAllTestUsers();
+        projectRepository.deleteAllTestProjects();
     }
 
     @Test
     void itShouldFindAllUserProjectsByUsername() {
         //given
         String username = "ExampleUsername";
-        User user = new User((long)1, username, "email", "password",LocalDate.now(),null,null,UserRole.ROLE_USER,false,true);
+        User user = new User(1L, username, "email", "password",LocalDate.now(),
+                null,null,UserRole.ROLE_USER,false,true);
         userRepository.save(user);
         List<User> projectUsers =new ArrayList<>();
         projectUsers.add(user);
-        Project project1 = new Project((long)0,"TestProject","TestProject", LocalDate.now(),null, projectUsers);
-        Project project2 = new Project((long)0,"TestProject","TestProject", LocalDate.now(),null, projectUsers);
+        Project project1 = new Project(1L,"TestProject","TestProject", LocalDate.now(),null, projectUsers);
+        Project project2 = new Project(2L,"TestProject","TestProject", LocalDate.now(),null, projectUsers);
         projectRepository.save(project1);
         projectRepository.save(project2);
 
@@ -55,24 +55,44 @@ class ProjectRepositoryTest {
         //given
         String username1 = "ExampleUsername1";
         String username2 = "ExampleUsername2";
-        User user1 = new User((long)1, username1, "email", "password",LocalDate.now(),null,null,UserRole.ROLE_USER,false,true);
-        User user2 = new User((long)1, username2, "email", "password",LocalDate.now(),null,null,UserRole.ROLE_USER,false,true);
+        User user1 = new User(1L, username1, "email", "password",LocalDate.now(),
+                null,null,UserRole.ROLE_USER,false,true);
+        User user2 = new User(2L, username2, "email", "password", LocalDate.now(),
+                null,null,UserRole.ROLE_USER,false,true);
         userRepository.save(user1);
         userRepository.save(user2);
         List<User> projectUsers1 =new ArrayList<>();
         projectUsers1.add(user1);
         List<User> projectUsers2 =new ArrayList<>();
         projectUsers2.add(user2);
-        Project project1 = new Project((long)0,"TestProject","TestProject", LocalDate.now(),null, projectUsers1);
-        Project project2 = new Project((long)0,"TestProject","TestProject", LocalDate.now(),null, projectUsers2);
+        Project project1 = new Project(1L,"TestProject","TestProject", LocalDate.now(),null, projectUsers1);
+        Project project2 = new Project(2L,"TestProject","TestProject", LocalDate.now(),null, projectUsers2);
         projectRepository.save(project1);
         projectRepository.save(project2);
 
         //when
-        List<Project> projectsFoundByUsername = projectRepository.findAll();
+        List<Project> projectsFoundByUsername = projectRepository.findByProjectUsers_Username(username2);
 
         //then
-        assertEquals(2, projectsFoundByUsername.size());
+        assertEquals(projectsFoundByUsername.size(), 1);
+    }
+    @Test
+    void itShouldNotFindAnyUser() {
+        //given
+        String username1 = "ExampleUsername1";
+        User user1 = new User((long)1, username1, "email", "password",LocalDate.now(),
+                null,null,UserRole.ROLE_USER,false,true);
+        userRepository.save(user1);
+        List<User> projectUsers1 =new ArrayList<>();
+        projectUsers1.add(user1);
+        Project project1 = new Project(1L,"TestProject","TestProject", LocalDate.now(),null, projectUsers1);
+        projectRepository.save(project1);
+
+        //when
+        List<Project> projectsFoundByUsername = projectRepository.findByProjectUsers_Username("wrong");
+
+        //then
+        assertTrue(projectsFoundByUsername.isEmpty());
     }
 
     @Test
