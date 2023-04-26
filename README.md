@@ -24,5 +24,15 @@ A Jira-like application that allows issues/bug tracking, task assigning and Kanb
 
 # Authentication
 
+This application uses JWT based authentication and authorization. Any user can create an account under endpoint:
+
+with exaple body
+<code>
+{
+"username":"user",
+"password":"user"
+"email": "user@gmail.com"
+}
+
 
 
