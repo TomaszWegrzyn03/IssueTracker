@@ -8,6 +8,7 @@ A Jira-like application that allows issues/bug tracking, task assigning and Kanb
 # Endpoints 
 <h1> Issues </h1>
 <h2> GET List of all Issues. </h2>
+Public endpoint for retreving all posted Issues.
 <h2> GET Issue by id. </h2>
 <h2> GET List of all Issues in Project by Project Id</h2>
 <h2> POST Issue. </h2>
