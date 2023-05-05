@@ -8,6 +8,7 @@ A Jira-like application that allows issues/bug tracking, task assigning and Kanb
 # Endpoints 
 <h1> Issues </h1>
 <h2> GET List of all Issues. </h2>
+Public endpoint for retreving all posted Issues.
 <h2> GET Issue by id. </h2>
 <h2> GET List of all Issues in Project by Project Id</h2>
 <h2> POST Issue. </h2>
@@ -23,6 +24,16 @@ A Jira-like application that allows issues/bug tracking, task assigning and Kanb
 <h2> UPDATE  Project. </h2>
 
 # Authentication
+
+This application uses JWT based authentication and authorization. Any user can create an account under endpoint:
+
+with exaple body
+<code>
+{
+"username":"user",
+"password":"user"
+"email": "user@gmail.com"
+}
 
 
 
