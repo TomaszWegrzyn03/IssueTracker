@@ -14,7 +14,7 @@ import java.util.List;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "increment")
     @Column(updatable = false, name = "project_id")
     private Long projectId;
 
@@ -27,7 +27,7 @@ public class Project {
     @Column(nullable = false, columnDefinition = "date", name = "created_at")
     private LocalDate createdAt;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Issue> issues;
 

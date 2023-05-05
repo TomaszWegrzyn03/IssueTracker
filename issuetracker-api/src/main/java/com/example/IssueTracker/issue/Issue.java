@@ -11,7 +11,7 @@ import java.util.List;
 public class Issue {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "increment")
     @Column(updatable = false, name = "issue_id")
     private Long issueId;
 
@@ -34,14 +34,13 @@ public class Issue {
     private String issuePriority;
 
     @JoinColumn(name = "project_id", insertable = false,updatable = false)
-    @ManyToOne( fetch = FetchType.LAZY)
-    @Getter(AccessLevel.NONE)
+    @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Project project;
 
     @Column(nullable = false, columnDefinition = "bigint", name = "project_id")
     private Long projectId;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name="issue_users",
             joinColumns = @JoinColumn(name="issue_id"),
@@ -51,6 +50,20 @@ public class Issue {
 
     public Issue(String issueTitle, String issueDesc, String issueType, String issueStatus,
                  String issuePriority, Long projectId, LocalDate createdAt, List<User> issueUsers) {
+
+        this.issueTitle = issueTitle;
+        this.issueDesc = issueDesc;
+        this.createdAt = createdAt;
+        this.issueType = issueType;
+        this.issueStatus = issueStatus;
+        this.issuePriority = issuePriority;
+        this.projectId = projectId;
+        this.issueUsers = issueUsers;
+    }
+
+    public Issue(Long issueId, String issueTitle, String issueDesc, String issueType, String issueStatus,
+                 String issuePriority, Long projectId, LocalDate createdAt, List<User> issueUsers) {
+        this.issueId = issueId;
         this.issueTitle = issueTitle;
         this.issueDesc = issueDesc;
         this.createdAt = createdAt;

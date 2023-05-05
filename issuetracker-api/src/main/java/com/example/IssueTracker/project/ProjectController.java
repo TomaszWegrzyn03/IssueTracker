@@ -1,5 +1,4 @@
 package com.example.IssueTracker.project;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -8,11 +7,13 @@ import java.util.List;
 @RequestMapping(path = "api/Projects")
 public class ProjectController {
 
-    @Autowired
-    private ProjectService projectService;
+    private final ProjectService projectService;
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     @GetMapping
-    public List<ProjectTestDto> getAllProjects(){
+    public List<ProjectGetDto> getAllProjects(){
         return projectService.getAllProjects();
     }
 

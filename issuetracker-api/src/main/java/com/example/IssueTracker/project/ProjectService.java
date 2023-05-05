@@ -4,7 +4,7 @@ import java.util.List;
 
 @Service
 public interface ProjectService {
-    List<ProjectTestDto> getAllProjects();
+    List<ProjectGetDto> getAllProjects();
 
     List<ProjectDto> getAllSimpleProjects();
 

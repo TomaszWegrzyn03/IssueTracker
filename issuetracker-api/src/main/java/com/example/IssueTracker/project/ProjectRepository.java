@@ -17,4 +17,9 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query(value="DELETE  from project_users  WHERE project_id IN (SELECT project_id from projects where project_id = :project_id); " +
             "DELETE from projects WHERE project_id = :project_id ", nativeQuery = true)
     void deleteProject(@Param("project_id")Long projectId);
+
+    @Transactional
+    @Modifying
+    @Query(value="DELETE from projects; ALTER TABLE projects ALTER COLUMN project_id RESTART WITH 1 ", nativeQuery = true)
+    void deleteAllTestProjects();
 }

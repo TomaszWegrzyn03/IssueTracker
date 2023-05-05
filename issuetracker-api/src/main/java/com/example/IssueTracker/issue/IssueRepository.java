@@ -23,4 +23,9 @@ public interface IssueRepository  extends JpaRepository<Issue, Long> {
     @Query(value="DELETE  from issue_users  WHERE issue_id = :issue_id ; " +
             "DELETE  from issues WHERE issue_id = :issue_id ", nativeQuery = true)
     void deleteIssue(@Param("issue_id")Long issueId);
+
+    @Transactional
+    @Modifying
+    @Query(value="DELETE from issues; ALTER TABLE issues ALTER COLUMN issue_id RESTART WITH 1 ", nativeQuery = true)
+    void deleteAllTestIssues();
 }

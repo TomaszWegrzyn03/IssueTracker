@@ -1,14 +1,16 @@
 package com.example.IssueTracker.issue;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/Issues")
+@RequestMapping(path = "api/issues")
 public class IssueController {
 
-    @Autowired
-    private IssueService issueService;
+
+    private final IssueService issueService;
+    public IssueController(IssueService issueService) {
+        this.issueService = issueService;
+    }
 
     @GetMapping
     public List<IssueDto> getAllSimpleIssues(){
@@ -20,7 +22,7 @@ public class IssueController {
         return issueService.getSimpleIssue(issueId);
     }
 
-    @GetMapping("Project/{id}")
+    @GetMapping("project/{id}")
     public List<IssueGetDto> getIssuesByProjectID(@PathVariable("id") Long projectId){
         return issueService.getIssuesByProjectId(projectId);
     }
