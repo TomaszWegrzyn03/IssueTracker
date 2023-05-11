@@ -34,6 +34,13 @@ with exaple body
 "password":"user"
 "email": "user@gmail.com"
 }
+  </code>
+
+  
+# Tests 
+![image](https://github.com/TomaszWegrzyn03/IssueTracker/assets/101212671/2a06e050-f44e-473f-808f-45a2ebb922b4) <br>
+![image](https://github.com/TomaszWegrzyn03/IssueTracker/assets/101212671/eff52ef3-b691-43ed-86a3-ad2a7572183c)
+
 
 
 
