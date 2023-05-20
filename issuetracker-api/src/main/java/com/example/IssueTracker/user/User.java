@@ -1,10 +1,7 @@
 package com.example.IssueTracker.user;
 import com.example.IssueTracker.issue.Issue;
 import com.example.IssueTracker.project.Project;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,10 +11,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-@Entity(name = "users") @Table @AllArgsConstructor @NoArgsConstructor @Getter @Setter
+@Entity(name = "users") @Table @AllArgsConstructor @NoArgsConstructor @Getter @Setter @EqualsAndHashCode
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "increment")
     @Column(updatable = false, name = "user_id")
     private Long userId;
 
@@ -50,6 +47,14 @@ public class User implements UserDetails {
     private boolean enabled;
 
     public User(Long userId, String username) {
+        this.userId = userId;
+        this.username = username;
+        this.email = "email";
+        this.userRole = UserRole.ROLE_USER;
+        this.createdAt = LocalDate.now();
+        this.enabled = true;
+        this.locked = false;
+
     }
 
     public User(String username, String email, UserRole roleUser, String password, LocalDate now, boolean b, boolean b1) {
